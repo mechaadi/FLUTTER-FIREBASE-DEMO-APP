@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "857852480256",
+    "firebase_url": "https://a7atestdatabase.firebaseio.com",
+    "project_id": "a7atestdatabase",
+    "storage_bucket": "a7atestdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857852480256:android:8c11c3e6bce4edb41b81e5",
+        "android_client_info": {
+          "package_name": "com.example.social_test_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857852480256-mrpjd5ti0vh2ne9pchqcs7t2346u1ulc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFBHTmmrluCwaXIpKki9P2wLZIa02KCiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857852480256-mrpjd5ti0vh2ne9pchqcs7t2346u1ulc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
