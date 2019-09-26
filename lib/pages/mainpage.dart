@@ -58,7 +58,7 @@ static List<String> _widgetnames = <String>[
   "HOME",
   "CREATE NEW POST",
   
-  "SAVED POSTS"
+  "SAVED POSTS",
   "PROFILE",
 ];
 
