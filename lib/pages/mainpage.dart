@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_android_lifecycle/flutter_android_lifecycle.dart';
 import 'package:flutter_branch_io_plugin/flutter_branch_io_plugin.dart';
 import 'package:social_test_app/pages/Profile.dart';
+import 'package:social_test_app/pages/saved_posts.dart';
 import 'package:social_test_app/pages/signup_screen.dart';
 import 'package:social_test_app/widgets/posts.dart';
 
@@ -48,13 +49,16 @@ static  List<Widget> _widgetOptions = <Widget>[
   
   Posts(),
   AddItemScreen(),
+  SavedPosts(),
   Profile(),
+  
 ];
 
 static List<String> _widgetnames = <String>[
   "HOME",
   "CREATE NEW POST",
-  "PROFILE"
+  "PROFILE",
+  "SAVED POSTS"
 ];
 
   @override
@@ -93,6 +97,10 @@ static List<String> _widgetnames = <String>[
         BottomNavigationBarItem(
           icon: Icon(Icons.add),
           title: Text('New post'),
+        ),
+         BottomNavigationBarItem(
+          icon: Icon(Icons.bookmark),
+          title: Text('Bookmarked'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),

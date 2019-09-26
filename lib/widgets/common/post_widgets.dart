@@ -232,9 +232,13 @@ class _PostWidgetState extends State<PostWidget> {
         this.generatedLink = link;
       });
     }).onData((v) {
-      Share.text('my text title', v, 'text/plain');
+
+      /// HAVING SOME ISSUES WITH BRANCH IO CODE..
+      //Share.text('my text title', v, 'text/plain');
       
     });
+
+     Share.text('my text title', title + "\n\n" + body + "\n\nimage : " + url, 'text/plain');
 
 // var request = await HttpClient().getUrl(Uri.parse(url));
 // var response = await request.close();
