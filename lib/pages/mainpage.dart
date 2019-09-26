@@ -57,8 +57,9 @@ static  List<Widget> _widgetOptions = <Widget>[
 static List<String> _widgetnames = <String>[
   "HOME",
   "CREATE NEW POST",
-  "PROFILE",
+  
   "SAVED POSTS"
+  "PROFILE",
 ];
 
   @override
