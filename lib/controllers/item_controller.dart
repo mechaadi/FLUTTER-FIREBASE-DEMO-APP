@@ -28,10 +28,10 @@ class ItemController{
     String imageUrl=await ImageController.storeImage(image,compress: false);
     item.thumbnail=thumbnailUrl;
     item.image=imageUrl;
-    await _fireStore.collection(ITEMS).add(item.toJson());
+    await _fireStore.collection(ITEMS).document(item.id).setData(item.toJson());
   }
 
-  static Future LikeItem(String id) async{
+  static Future LikeItem(String id, String uid) async{
     final DocumentReference postRef = Firestore.instance.collection('posts').document(id);
     Firestore.instance.runTransaction((Transaction tx) async {
       DocumentSnapshot postSnapshot = await tx.get(postRef);
@@ -40,18 +40,29 @@ class ItemController{
       }
     });
 
-  //  final DocumentReference addref = Firestore.instance.collection('posts').document(id).collection("likedby");
+    Firestore.instance.collection('posts').document(id).collection("likedby").document(uid).setData({
+      "uid" : uid,
+      "liked" : true
+    }
+    );
+
 
 
   }
 
-  static Future DislikeItem(String id) async{
+  static Future DislikeItem(String id, String uid) async{
     final DocumentReference postRef = Firestore.instance.collection('posts').document(id);
     Firestore.instance.runTransaction((Transaction tx) async {
       DocumentSnapshot postSnapshot = await tx.get(postRef);
       if (postSnapshot.exists) {
         await tx.update(postRef, <String, dynamic>{'likesCount': postSnapshot.data['likesCount'] - 1});
       }
+    });
+
+    Firestore.instance.collection('posts').document(id).collection("likedby").document(uid).delete().then((v){
+      print("deleted");
+    }).catchError((v){
+      print(v);
     });
   }
 

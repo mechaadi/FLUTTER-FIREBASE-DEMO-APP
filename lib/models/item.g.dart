@@ -18,6 +18,7 @@ Item _$ItemFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['timestamp'] as String),
     json['uid'] as String,
+    json['likesCount'] as int,
   );
 }
 
@@ -30,4 +31,5 @@ Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
       'author': instance.author,
       'timestamp': instance.timestamp?.toIso8601String(),
       'uid': instance.uid,
+      'likesCount': instance.likesCount,
     };

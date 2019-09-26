@@ -25,7 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   firebase_core: 
   firebase_auth: 
-  cloud_firestore:
+  cloud_firestore: ^0.12.4
   font_awesome_flutter: 
   firebase_storage:
   json_annotation:

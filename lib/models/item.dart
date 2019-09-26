@@ -14,11 +14,12 @@ class Item{
   String author;
   DateTime timestamp;
   String uid;
+  int likesCount;
  
 
-  Item(this.id,this.title, this.body, this.image,this.thumbnail, this.author, this.timestamp, this.uid);
+  Item(this.id,this.title, this.body, this.image,this.thumbnail, this.author, this.timestamp, this.uid, this.likesCount);
 
-  Item.named({this.id, this.title, this.body, this.image, this.thumbnail, this.author, this.timestamp, this.uid});
+  Item.named({this.id, this.title, this.body, this.image, this.thumbnail, this.author, this.timestamp, this.uid, this.likesCount});
 
 
   Map<String,dynamic> toJson()=>_$ItemToJson(this);

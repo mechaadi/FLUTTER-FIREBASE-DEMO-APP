@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:social_test_app/controllers/item_controller.dart';
 import 'package:social_test_app/controllers/user_controller.dart';
 import 'package:social_test_app/models/item.dart';
@@ -24,7 +25,6 @@ class _AddItemScreenState extends State<AddItemScreen> {
   String id, name;
   User user;
   Item item = Item.named();
-  List<String> categories = ["Electronics", "Cars", "Clothes"];
 
 
   void getInitUser() async {
@@ -34,7 +34,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
       name = user.name;
     });
 
-    item = Item.named(author: name, timestamp: DateTime.now(), uid:id);
+    item = Item.named(author: name, timestamp: DateTime.now(), uid:id, likesCount: 0);
 
   }
 
@@ -112,7 +112,15 @@ class _AddItemScreenState extends State<AddItemScreen> {
         
         "Submit",
         onTap: !canSubmit
-            ? null
+            ?  (){Fluttertoast.showToast(
+        msg: "Image, title and body are mandatory",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIos: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );}
             : () async {
                 setState(() {
                   submitting = true;

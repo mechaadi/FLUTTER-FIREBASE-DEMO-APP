@@ -15,12 +15,12 @@ import 'package:social_test_app/models/user.dart';
 import 'package:social_test_app/pages/DetailScreen.dart';
 import 'package:social_test_app/widgets/common/post_widgets.dart';
 
-class Posts extends StatefulWidget {
+class SavedPosts extends StatefulWidget {
   @override
-  PostsState createState() => new PostsState();
+  SavedPostsState createState() => new SavedPostsState();
 }
 
-class PostsState extends State<Posts> {
+class SavedPostsState extends State<SavedPosts> {
   String id, name, image;
   User user;
   String generatedLink = " ";
@@ -46,8 +46,8 @@ class PostsState extends State<Posts> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('posts').snapshots(),
+    return Scaffold(body: StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('bookmarks').document(id).collection("saved").snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
         switch (snapshot.connectionState) {
@@ -159,7 +159,7 @@ class PostsState extends State<Posts> {
             );
         }
       },
-    );
+    ));
   }
 
 
