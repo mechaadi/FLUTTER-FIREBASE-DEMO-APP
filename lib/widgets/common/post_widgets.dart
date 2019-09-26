@@ -238,7 +238,7 @@ class _PostWidgetState extends State<PostWidget> {
       
     });
 
-     Share.text('my text title', title + "\n\n" + body + "\n\nimage : " + url, 'text/plain');
+     Share.text('SHARE WITH', title + "\n\n" + body + "\n\nimage : " + url, 'text/plain');
 
 // var request = await HttpClient().getUrl(Uri.parse(url));
 // var response = await request.close();
