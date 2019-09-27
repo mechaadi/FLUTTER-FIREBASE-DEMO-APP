@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as prefix0;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:social_test_app/controllers/user_controller.dart';
 import 'package:social_test_app/models/user.dart';
 import 'package:path/path.dart' as Path;  
@@ -16,6 +19,8 @@ class OpenChatRoom extends StatefulWidget {
 }
 
 class _OpenChatRoomState extends State<OpenChatRoom> {
+
+  ScrollController _controller = ScrollController();
 
  
   var time ;
@@ -33,9 +38,16 @@ class _OpenChatRoomState extends State<OpenChatRoom> {
   }
   
 
+ bool _keyboardIsVisible() {
+    return !(MediaQuery.of(context).viewInsets.bottom == 0.0);
+  }
   @override
   void initState() { 
     super.initState();
+
+   // if(_keyboardIsVisible())     Timer(Duration(milliseconds: 1000), () => _controller.jumpTo(_controller.position.maxScrollExtent));
+
+
     getUser();
   }
 
@@ -44,6 +56,9 @@ class _OpenChatRoomState extends State<OpenChatRoom> {
 
   @override
   Widget build(BuildContext context) {
+
+    Timer(Duration(milliseconds: 1000), () => _controller.jumpTo(_controller.position.maxScrollExtent));
+
     return  Scaffold(
         body: Stack(children: <Widget>[
 
@@ -53,7 +68,9 @@ class _OpenChatRoomState extends State<OpenChatRoom> {
                     Expanded(
                       child: SizedBox(
                         height: 100,
-                        child: ListView(children: <Widget>[
+                        child: ListView(
+                          controller: _controller,
+                          children: <Widget>[
                           StreamBuilder<QuerySnapshot>(
                               stream: Firestore.instance.collection('/publicRoom').orderBy("time", descending: false).snapshots(),
                               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -131,6 +148,8 @@ Firestore.instance.collection("publicRoom").add({
     "uid" : id,
     "time" : FieldValue.serverTimestamp()
   }).then((v){
+        Timer(Duration(milliseconds: 1000), () => _controller.jumpTo(_controller.position.maxScrollExtent));
+
     commentController.text = "";
   }).catchError((e){
      Fluttertoast.showToast(
@@ -152,7 +171,8 @@ Firestore.instance.collection("publicRoom").add({
     "uid" : id,
     "time" : FieldValue.serverTimestamp()
   }).then((v){
-    
+        Timer(Duration(milliseconds: 1000), () => _controller.jumpTo(_controller.position.maxScrollExtent));
+
     print(_uploadedFileURL + " sent");
     Firestore.instance.collection("publicRoom").document(v.documentID).updateData({
       "image" : _uploadedFileURL

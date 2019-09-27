@@ -36,6 +36,8 @@ dependencies:
   flutter_android_lifecycle:
   fluttertoast:
   sliding_up_panel:
+  keyboard_visibility: ^0.5.2
+
 
 
 dev_dependencies:
