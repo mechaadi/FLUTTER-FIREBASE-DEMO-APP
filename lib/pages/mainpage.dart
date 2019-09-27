@@ -3,9 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_android_lifecycle/flutter_android_lifecycle.dart';
 import 'package:flutter_branch_io_plugin/flutter_branch_io_plugin.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:social_test_app/controllers/user_controller.dart';
+import 'package:social_test_app/pages/DetailScreen.dart';
 import 'package:social_test_app/pages/Profile.dart';
+import 'package:social_test_app/pages/public_chat_room.dart';
 import 'package:social_test_app/pages/saved_posts.dart';
 import 'package:social_test_app/pages/signup_screen.dart';
+import 'package:social_test_app/pages/testpage.dart';
+import 'package:social_test_app/pages/testpage.dart';
 import 'package:social_test_app/widgets/posts.dart';
 
 
@@ -19,9 +25,25 @@ class Mainpage extends StatefulWidget {
 
 class _MainpageState extends State<Mainpage> {
 
+
+  var id = "";
+  var name = "";
+
+  void getUser() async{
+    user = await UserController.getCurrentUser();
+    setState(() {
+      id = user.id;
+      name = user.name;
+    });
+  }
+  
+
+ 
+
  @override
   void initState() {
     super.initState();
+    getUser();
       if (Platform.isAndroid) FlutterBranchIoPlugin.setupBranchIO();
       FlutterBranchIoPlugin.listenToDeepLinkStream().listen((string) {
         print("DEEPLINK $string");
@@ -37,7 +59,7 @@ class _MainpageState extends State<Mainpage> {
 
   }
 
-  int _selectedIndex = 0;
+int _selectedIndex = 0;
 
 void _onItemTapped(int index) {
   setState(() {
@@ -50,6 +72,7 @@ static  List<Widget> _widgetOptions = <Widget>[
   Posts(),
   AddItemScreen(),
   SavedPosts(),
+  OpenChatRoom(),
   Profile(),
   
 ];
@@ -57,8 +80,8 @@ static  List<Widget> _widgetOptions = <Widget>[
 static List<String> _widgetnames = <String>[
   "HOME",
   "CREATE NEW POST",
-  
   "SAVED POSTS",
+  "PUBLIC CHAT ROOM",
   "PROFILE",
 ];
 
@@ -92,24 +115,28 @@ static List<String> _widgetnames = <String>[
       bottomNavigationBar: BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          title: Text('Home'),
+          icon: Icon(Icons.home, color: Colors.blueAccent),
+          title: Text("HOME",),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.add),
+          icon: Icon(Icons.add_box, color: Colors.blueAccent),
           title: Text('New post'),
         ),
          BottomNavigationBarItem(
-          icon: Icon(Icons.bookmark),
+          icon: Icon(Icons.bookmark, color: Colors.blueAccent),
           title: Text('Bookmarked'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(FontAwesomeIcons.solidCommentAlt, color: Colors.blueAccent),
+          title: Text('Chat'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle, color: Colors.blueAccent,),
           title: Text('Profile'),
         ),
       ],
       currentIndex: _selectedIndex,
-      selectedItemColor: Colors.amber[800],
+      selectedItemColor: Colors.grey,
       onTap: _onItemTapped,
     ),
     ) ,

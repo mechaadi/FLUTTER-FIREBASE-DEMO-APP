@@ -35,6 +35,7 @@ dependencies:
   flutter_branch_io_plugin:
   flutter_android_lifecycle:
   fluttertoast:
+  sliding_up_panel:
 
 
 dev_dependencies:
